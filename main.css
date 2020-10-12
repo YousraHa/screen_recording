@@ -1,0 +1,10 @@
+body {
+    background-color: #0e0e0efa;
+}
+
+.icone{
+    float: right
+    /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
