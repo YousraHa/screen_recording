@@ -101,9 +101,12 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 //     return captureStream;
 //   }
 
+// jQuery pour le draggable
 $(function () {
     $("#winston").draggable()
   });
+
+//bout de code pour le screen sharing que j'essaie de faire fonctionner
 
 // const videoElement = document.getElementById("video");
 // const startt = document.getElementById("start");
