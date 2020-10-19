@@ -3,8 +3,10 @@ let constraintObj = {
     audio: true, 
     video: { 
         facingMode: "user", 
-        width: { min: 640, ideal: 1280, max: 1920 },
-        height: { min: 480, ideal: 720, max: 1080 } 
+        // width: { min: 640, ideal: 1280, max: 1920 },
+        // height: { min: 480, ideal: 720, max: 1080 } 
+        // width : {ideal : 100%},
+        // height: 100%
     },
     // screen: {
     //     mediaSource : "screen"
@@ -70,15 +72,22 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     
     start.addEventListener('click', (ev)=>{
         mediaRecorder.start();
-        console.log(mediaRecorder.state);
+        // var btn = document.getElementById("btnStop");
+        console.log(mediaRecorder.state, 'start');
     })
     stop.addEventListener('click', (ev)=>{
         mediaRecorder.stop();
-        console.log(mediaRecorder.state);
+        // modal.style.display = "block";
+        // $("close").modal('hide');
+        $("#myModal").modal();
+        console.log(mediaRecorder.state, 'stop');
     });
     mediaRecorder.ondataavailable = function(ev) {
         chunks.push(ev.data);
     }
+        // stop.onclick = function() {
+        //     modal.style.display = "block";
+        //   }
     mediaRecorder.onstop = (ev)=>{
         let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
         chunks = [];

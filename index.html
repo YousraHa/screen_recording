@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>MediaCapture and Streams API</title>
@@ -14,7 +14,9 @@
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
         crossorigin="anonymous">
         </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -23,24 +25,62 @@
     </head>
     <body>
         <div class="container">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <div class="mx-auto order-0">
+                    <a class="navbar-brand mx-auto" href="#">Welcome</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">User</a>
+                            <!-- <video class="smallCam" id="winston"></video> -->
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <main>
                 <div class="row">
-                    <p><button id="btnStart">Click to start recording</button><br/>
-                    <button id="btnStop">STOP recording</button></p>
+                    <!-- <button id="myBtn">Open Modal</button> -->
                 </div>
                 <div class="row">
-                    <video controls id="winston"></video>
+                    <video class="webcam" controls id="winston"></video>
                     <!-- <button id="start">start screen</button></p>
                     <button id="stop">stop screen</button></p> -->
-                    <video id="vid2" controls></video>
+                    <!-- <video id="vid2" controls></video> -->
 
                 </div>
-                <div class="row icone" >
-                    <button class="material-icons">
-                        present_to_all
-                    </button>    
-                </div>            
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" data-dismiss="modal" aria-label="Close">&times;</span>
+                        <p>Video down below</p>
+                        <video id="vid2" controls></video>
+                    </div>
+                </div>
             </main>
         </div>
+        <footer>
+            <div class="row flex" >
+                <button class="material-icons flex-item">
+                    mic_none
+                </button>
+                <button class="material-icons flex-item" style="color: red">
+                    call_end
+                </button>
+                <button class="material-icons flex-item">
+                    videocam
+                </button>
+                <button class="material-icons flex-item">
+                    present_to_all
+                </button>   
+                <button id="btnStart" class=" flex-item">START</button>
+                <button id="btnStop" class="flex-item">STOP</button>
+            </div>    
+        </footer>        
     </body>
 </html>
