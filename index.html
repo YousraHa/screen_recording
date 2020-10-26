@@ -60,19 +60,21 @@
                         <span class="close" data-dismiss="modal" aria-label="Close">&times;</span>
                         <p>Video down below</p>
                         <video id="vid2" controls></video>
+                        <audio src="" id="audio" autoplay="true"></audio>
                     </div>
                 </div>
             </main>
         </div>
         <footer>
             <div class="row flex" >
-                <button class="material-icons flex-item">
+                <button class="material-icons flex-item" id="flip-button">
                     mic_none
                 </button>
+                
                 <button class="material-icons flex-item" style="color: red">
                     call_end
                 </button>
-                <button class="material-icons flex-item">
+                <button class="material-icons flex-item" onclick="myFunction()">
                     videocam
                 </button>
                 <button class="material-icons flex-item">

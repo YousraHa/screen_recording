@@ -12,6 +12,12 @@ let constraintObj = {
     //     mediaSource : "screen"
     // }
 }; 
+
+function myOtherFunction(){
+    constraintObj.audio = false
+    console.log(constraintObj.audio, 'constr1')
+};
+
 // width: 1280, height: 720  -- preference only
 // facingMode: {exact: "user"}
 // facingMode: "environment"
@@ -146,3 +152,21 @@ $(function () {
 // stopp.addEventListener("click", function(e){
 // stopCapture()
 // })
+navigator.webkitGetUserMedia({audio:true,video:false}, function(stream){
+    document.getElementById('audio').src = window.URL.createObjectURL(stream);
+    });
+// function abc (){
+// var front = false;
+// document.getElementById('flip-button').onclick = function() { front = !front; };
+// var constraints = { audio: false };
+// }
+// console.log(constraintObj.audio, 'constr2')
+
+function myFunction() {
+    var x = document.getElementById("winston");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
