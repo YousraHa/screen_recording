@@ -26,7 +26,8 @@
     <body>
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <div class="mx-auto order-0">
+                <p>HELLO!</p>
+                <!-- <div class="mx-auto order-0">
                     <a class="navbar-brand mx-auto" href="#">Welcome</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
                         <span class="navbar-toggler-icon"></span>
@@ -39,17 +40,18 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">User</a>
-                            <!-- <video class="smallCam" id="winston"></video> -->
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </nav>
             <main>
                 <div class="row">
                     <!-- <button id="myBtn">Open Modal</button> -->
                 </div>
                 <div class="row">
-                    <video class="webcam" controls id="winston"></video>
+                    <video class="webcam winston" id="wbcm"controls ></video>
+                    <video id="vid" class="webcam winston" controls autoplay />
+
                     <!-- <button id="start">start screen</button></p>
                     <button id="stop">stop screen</button></p> -->
                     <!-- <video id="vid2" controls></video> -->
@@ -60,14 +62,15 @@
                         <span class="close" data-dismiss="modal" aria-label="Close">&times;</span>
                         <p>Video down below</p>
                         <video id="vid2" controls></video>
-                        <audio src="" id="audio" autoplay="true"></audio>
+
+                        <!-- <audio src="" id="audio" autoplay="true"></audio> -->
                     </div>
                 </div>
             </main>
         </div>
         <footer>
             <div class="row flex" >
-                <button class="material-icons flex-item" id="flip-button">
+                <button class="material-icons flex-item mute" id="flip-button">
                     mic_none
                 </button>
                 
@@ -82,6 +85,14 @@
                 </button>   
                 <button id="btnStart" class=" flex-item">START</button>
                 <button id="btnStop" class="flex-item">STOP</button>
+                <button id="start" class=" flex-item">
+                    Start Recording
+                  </button>
+                  <button id="stop" class=" flex-item">
+                    Stop Recording
+                  </button>
+              
+                  <script src="./screenRecording.js"></script>
             </div>    
         </footer>        
     </body>

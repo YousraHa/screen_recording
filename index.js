@@ -13,10 +13,10 @@ let constraintObj = {
     // }
 }; 
 
-function myOtherFunction(){
-    constraintObj.audio = false
-    console.log(constraintObj.audio, 'constr1')
-};
+// function myOtherFunction(){
+//     constraintObj.audio = false
+//     console.log(constraintObj.audio, 'constr1')
+// };
 
 // width: 1280, height: 720  -- preference only
 // facingMode: {exact: "user"}
@@ -118,7 +118,7 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 
 // jQuery pour le draggable
 $(function () {
-    $("#winston").draggable()
+    $(".winston").draggable()
   });
 
 //bout de code pour le screen sharing que j'essaie de faire fonctionner
@@ -152,9 +152,10 @@ $(function () {
 // stopp.addEventListener("click", function(e){
 // stopCapture()
 // })
-navigator.webkitGetUserMedia({audio:true,video:false}, function(stream){
-    document.getElementById('audio').src = window.URL.createObjectURL(stream);
-    });
+// navigator.webkitGetUserMedia({audio:true,video:false}, function(stream){
+//     document.getElementById('audio').src = window.URL.createObjectURL(stream);
+//     });
+// document.getElementById("webcam").muted = true;
 // function abc (){
 // var front = false;
 // document.getElementById('flip-button').onclick = function() { front = !front; };
@@ -163,10 +164,46 @@ navigator.webkitGetUserMedia({audio:true,video:false}, function(stream){
 // console.log(constraintObj.audio, 'constr2')
 
 function myFunction() {
-    var x = document.getElementById("winston");
+    var x = document.getElementById("wbcm");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
       x.style.display = "none";
     }
-  }
+  };
+
+//   const start1 = document.getElementById("start");
+//   const stop1 = document.getElementById("stop");
+//   const video1 = document.querySelector("video");
+//   let recorder, stream;
+  
+//   async function startRecording() {
+//     stream = await navigator.mediaDevices.getDisplayMedia({
+//       video: { mediaSource: "screen" }
+//     });
+//     recorder = new MediaRecorder(stream);
+  
+//     const chunks = [];
+//     recorder.ondataavailable = e => chunks.push(e.data);
+//     recorder.onstop = e => {
+//       const completeBlob = new Blob(chunks, { type: chunks[0].type });
+//       video.src = URL.createObjectURL(completeBlob);
+//     };
+  
+//     recorder.start1();
+//   }
+  
+//   start1.addEventListener("click", () => {
+//     start1.setAttribute("disabled", true);
+//     stop1.removeAttribute("disabled");
+  
+//     startRecording();
+//   });
+  
+//   stop1.addEventListener("click", () => {
+//     stop1.setAttribute("disabled", true);
+//     start1.removeAttribute("disabled");
+  
+//     recorder.stop1();
+//     stream.getVideoTracks()[0].stop();
+//   });
