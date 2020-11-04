@@ -49,8 +49,9 @@
                     <!-- <button id="myBtn">Open Modal</button> -->
                 </div>
                 <div class="row">
-                    <video class="webcam winston" id="wbcm"controls ></video>
-                    <video id="vid" class="webcam winston" controls autoplay />
+                    <video class="webcam winston" id="wbcm" ></video>
+                    <video id="vid" class="webcam winston" autoplay />
+                    <pre id="log"></pre>
 
                     <!-- <button id="start">start screen</button></p>
                     <button id="stop">stop screen</button></p> -->
@@ -70,29 +71,45 @@
         </div>
         <footer>
             <div class="row flex" >
-                <button class="material-icons flex-item mute" id="flip-button">
+                <!-- <button class="material-icons flex-item mute" id="flip-button">
                     mic_none
-                </button>
-                
+                </button> -->
                 <button class="material-icons flex-item" style="color: red">
                     call_end
                 </button>
-                <button class="material-icons flex-item" onclick="myFunction()">
+                <button class="material-icons flex-item" id="startWebcam">
                     videocam
                 </button>
-                <button class="material-icons flex-item">
+                <button class="material-icons flex-item" id="stopWebcam">
+                    videocam_off
+                </button>
+                <!-- <button class="material-icons flex-item">
                     present_to_all
-                </button>   
-                <button id="btnStart" class=" flex-item">START</button>
+                </button>    -->
+                <button id="btnStart" class="flex-item">START</button>
                 <button id="btnStop" class="flex-item">STOP</button>
-                <button id="start" class=" flex-item">
-                    Start Recording
-                  </button>
-                  <button id="stop" class=" flex-item">
-                    Stop Recording
-                  </button>
+                <button id="startMic" class="flex-item">
+                    <span class="material-icons">
+                        mic
+                    </span>
+                </button>
+                <button id="stopMic" class="flex-item">
+                    <span class="material-icons">
+                        mic_off
+                    </span>
+                </button>
+                <button id="start" class="flex-item">
+                    <span class="material-icons">
+                        screen_share
+                    </span>
+                </button>
+                <button id="stop" class=" flex-item">
+                    <span class="material-icons">
+                        stop_screen_share
+                    </span>
+                </button>
               
-                  <script src="./screenRecording.js"></script>
+                  <script src="./screenRecording2.js"></script>
             </div>    
         </footer>        
     </body>

@@ -1,11 +1,13 @@
 const start = document.getElementById("start");
 const stop = document.getElementById("stop");
-const video = document.getElementById("vid");
+const video = document.querySelector("#vid");
 let recorder, stream;
 
 async function startRecording() {
   stream = await navigator.mediaDevices.getDisplayMedia({
-    video: { mediaSource: "screen" }
+    video: { 
+      mediaSource: "screen",
+      cursor: "always" }
   });
   recorder = new MediaRecorder(stream);
 

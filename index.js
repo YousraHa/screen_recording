@@ -1,4 +1,3 @@
-
 let constraintObj = { 
     audio: true, 
     video: { 
@@ -7,20 +6,10 @@ let constraintObj = {
         // height: { min: 480, ideal: 720, max: 1080 } 
         // width : {ideal : 100%},
         // height: 100%
-    },
-    // screen: {
-    //     mediaSource : "screen"
-    // }
+    }
 }; 
 
-// function myOtherFunction(){
-//     constraintObj.audio = false
-//     console.log(constraintObj.audio, 'constr1')
-// };
 
-// width: 1280, height: 720  -- preference only
-// facingMode: {exact: "user"}
-// facingMode: "environment"
 
 //handle older browsers that might implement getUserMedia in some way
 if (navigator.mediaDevices === undefined) {
@@ -64,14 +53,14 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         video.play();
     };
 
-    // async function startRecording() {
-    //     stream = await navigator.mediaDevices.getDisplayMedia({
-    //       video: { mediaSource: "screen" }
-    //     });
     
     //add listeners for saving video/audio
     let start = document.getElementById('btnStart');
     let stop = document.getElementById('btnStop');
+    let startMic = document.getElementById('startMic');
+    let stopMic = document.getElementById('stopMic');
+    let startWebcam = document.getElementById('startWebcam');
+    let stopWebcam = document.getElementById('stopWebcam')
     let vidSave = document.getElementById('vid2');
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
     let chunks = [];
@@ -83,17 +72,45 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     })
     stop.addEventListener('click', (ev)=>{
         mediaRecorder.stop();
-        // modal.style.display = "block";
-        // $("close").modal('hide');
         $("#myModal").modal();
+        console.log(mediaRecorder.state, 'stop');
+    });
+    //webcam
+    startWebcam.addEventListener('click', (ev)=>{
+        var track = mediaStreamObj.getTracks()[1];
+        track.enabled = true
+        // console.log(mediaStreamObj.getTracks(), 'gettracks')
+        // mediaStreamObj.getTracks().forEach(track => track.stop())
+        console.log(track,'track')
+        console.log(mediaRecorder.state, 'stop');
+    });
+    stopWebcam.addEventListener('click', (ev)=>{
+        var track = mediaStreamObj.getTracks()[1];
+        track.enabled = false
+        console.log(mediaStreamObj.getTracks(), 'gettracks')
+        // mediaStreamObj.getTracks().forEach(track => track.stop())
+        console.log(track,'track')
+        console.log(mediaRecorder.state, 'stop');
+    });
+    //micro
+    startMic.addEventListener('click', (ev)=>{
+        var track = mediaStreamObj.getTracks()[0];
+        track.enabled = true;
+        // mediaRecorder.start();
+        // console.log(track,'track');
+        console.log(mediaRecorder.state, 'stop');
+    });
+    stopMic.addEventListener('click', (ev)=>{
+        var track = mediaStreamObj.getTracks()[0];
+        track.enabled = false
+        console.log(mediaStreamObj.getTracks(), 'gettracks')
+        // mediaStreamObj.getTracks().forEach(track => track.stop())
+        console.log(track,'track')
         console.log(mediaRecorder.state, 'stop');
     });
     mediaRecorder.ondataavailable = function(ev) {
         chunks.push(ev.data);
     }
-        // stop.onclick = function() {
-        //     modal.style.display = "block";
-        //   }
     mediaRecorder.onstop = (ev)=>{
         let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
         chunks = [];
@@ -104,66 +121,13 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 .catch(function(err) { 
     console.log(err.name, err.message); 
 });
-// var promise = navigator.mediaDevices.getDisplayMedia(constraints)
-// async function startCapture(displayMediaOptions) {
-//     let captureStream = null;
-  
-//     try {
-//       captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-//     } catch(err) {
-//       console.error("Error: " + err);
-//     }
-//     return captureStream;
-//   }
 
 // jQuery pour le draggable
 $(function () {
     $(".winston").draggable()
   });
 
-//bout de code pour le screen sharing que j'essaie de faire fonctionner
-
-// const videoElement = document.getElementById("video");
-// const startt = document.getElementById("start");
-// const stopp = document.getElementById("stop");
-
-// var displayMediaOptions = {
-//     video:{
-//         cursor: 'always'
-//     },
-//     audio : false
-// };
-
-
-
-// async function startCapture(){
-//     try{
-//         videoElement.srcObject = await navigator.mediaDevices.getUserMedia(displayMediaOptions)
-        
-//     } catch(err) {
-//         console.log(err, 'erreur')
-//     }
-// }
-
-// startt.addEventListener("click", function(e){
-//     startCapture()
-// })
-
-// stopp.addEventListener("click", function(e){
-// stopCapture()
-// })
-// navigator.webkitGetUserMedia({audio:true,video:false}, function(stream){
-//     document.getElementById('audio').src = window.URL.createObjectURL(stream);
-//     });
-// document.getElementById("webcam").muted = true;
-// function abc (){
-// var front = false;
-// document.getElementById('flip-button').onclick = function() { front = !front; };
-// var constraints = { audio: false };
-// }
-// console.log(constraintObj.audio, 'constr2')
-
-function myFunction() {
+function hideWebcam() {
     var x = document.getElementById("wbcm");
     if (x.style.display === "none") {
       x.style.display = "block";
@@ -171,39 +135,3 @@ function myFunction() {
       x.style.display = "none";
     }
   };
-
-//   const start1 = document.getElementById("start");
-//   const stop1 = document.getElementById("stop");
-//   const video1 = document.querySelector("video");
-//   let recorder, stream;
-  
-//   async function startRecording() {
-//     stream = await navigator.mediaDevices.getDisplayMedia({
-//       video: { mediaSource: "screen" }
-//     });
-//     recorder = new MediaRecorder(stream);
-  
-//     const chunks = [];
-//     recorder.ondataavailable = e => chunks.push(e.data);
-//     recorder.onstop = e => {
-//       const completeBlob = new Blob(chunks, { type: chunks[0].type });
-//       video.src = URL.createObjectURL(completeBlob);
-//     };
-  
-//     recorder.start1();
-//   }
-  
-//   start1.addEventListener("click", () => {
-//     start1.setAttribute("disabled", true);
-//     stop1.removeAttribute("disabled");
-  
-//     startRecording();
-//   });
-  
-//   stop1.addEventListener("click", () => {
-//     stop1.setAttribute("disabled", true);
-//     start1.removeAttribute("disabled");
-  
-//     recorder.stop1();
-//     stream.getVideoTracks()[0].stop();
-//   });
