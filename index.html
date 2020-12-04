@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>MediaCapture and Streams API</title>
+        <title>Zoom like app</title>
         <meta name="viewport" content="width=device-width">
         <script 
         src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -17,16 +17,18 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
         <link href="main.css" rel="stylesheet"/>
-        <script src="./index.js"></script>
+        <script src="index.js"></script>
     </head>
     <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <p>HELLO!</p>
+        <!-- <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <p>HELLO!</p>
+        </nav> -->
+            <div class="container">
                 <!-- <div class="mx-auto order-0">
                     <a class="navbar-brand mx-auto" href="#">Welcome</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -43,74 +45,63 @@
                         </li>
                     </ul>
                 </div> -->
-            </nav>
-            <main>
+            <!-- <main> -->
+                <!-- <div class="row">
+                </div> -->
+                
                 <div class="row">
-                    <!-- <button id="myBtn">Open Modal</button> -->
+                    <video class="webcam winston" id="wbcm"></video>
                 </div>
                 <div class="row">
-                    <video class="webcam winston" id="wbcm" ></video>
-                    <video id="vid" class="webcam winston" autoplay />
+                    <video id="vid" class="screenCapture winston" autoplay />
+
                     <pre id="log"></pre>
-
-                    <!-- <button id="start">start screen</button></p>
-                    <button id="stop">stop screen</button></p> -->
-                    <!-- <video id="vid2" controls></video> -->
-
                 </div>
+                <div class="row">
+                    <video id="vidd" class="screenCapture winston" controls />
+                </div>
+
+                <!-- Modale start -->
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close" data-dismiss="modal" aria-label="Close">&times;</span>
                         <p>Video down below</p>
                         <video id="vid2" controls></video>
-
-                        <!-- <audio src="" id="audio" autoplay="true"></audio> -->
                     </div>
                 </div>
-            </main>
-        </div>
-        <footer>
-            <div class="row flex" >
-                <!-- <button class="material-icons flex-item mute" id="flip-button">
-                    mic_none
-                </button> -->
-                <button class="material-icons flex-item" style="color: red">
+                <!-- Modale end -->
+
+            </div>
+            <div class="container ">
+
+                <button class="material-icons flex-item">
                     call_end
                 </button>
-                <button class="material-icons flex-item" id="startWebcam">
+
+                <button class="material-icons flex-item" id="startWebcam" >
                     videocam
                 </button>
-                <button class="material-icons flex-item" id="stopWebcam">
-                    videocam_off
+
+                <button id="btnStart" class="flex-item">
+                    START
                 </button>
-                <!-- <button class="material-icons flex-item">
-                    present_to_all
-                </button>    -->
-                <button id="btnStart" class="flex-item">START</button>
-                <button id="btnStop" class="flex-item">STOP</button>
-                <button id="startMic" class="flex-item">
-                    <span class="material-icons">
-                        mic
-                    </span>
+
+                <button id="start1" class="flex-item">
+                    STARTscreen
                 </button>
-                <button id="stopMic" class="flex-item">
-                    <span class="material-icons">
-                        mic_off
-                    </span>
+
+                <button id="startMic" class="flex-item material-icons">
+                    mic
                 </button>
-                <button id="start" class="flex-item">
-                    <span class="material-icons">
-                        screen_share
-                    </span>
+
+                <button id="start" class="material-icons flex-item">
+                    stop_screen_share
                 </button>
-                <button id="stop" class=" flex-item">
-                    <span class="material-icons">
-                        stop_screen_share
-                    </span>
-                </button>
-              
-                  <script src="./screenRecording2.js"></script>
-            </div>    
-        </footer>        
+
+            </div>
+
+    <script src="screenRecording2.js"></script>
+    <script src="screenRecording.js"></script>
+
     </body>
 </html>

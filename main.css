@@ -1,5 +1,10 @@
 body {
-    background-color: #0e0e0efa;
+    background-color: #011627;
+    /* background-color: white; */
+
+    font-family: 'Rubik', sans-serif;
+    color: #fdfffc;
+    font-size: 30px;
 }
 footer{
   background-color: honeydew;
@@ -22,12 +27,60 @@ footer{
 }
 
 .webcam{
-  width: 500px;
-  height: 300px;
-  margin: 0 auto
+  /* width: 500px;
+  height: 500px; */
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.screenCapture{
+  /* width: 500px;
+  height: 500px; */
+  /* margin-top: 30px; */
+  max-width: 100%;
+  height: auto;
+  margin: 30px auto;
 }
 
 .smallCam{
   width: 150px;
   height: 50px;
 }
+
+button{
+  color: #ff9f1c;
+}
+
+/* div.object:hover {
+  animation: MoveUp linear;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+} */
+/* background-color: yellow; */
+
+/* .object {
+  display: none;
+  background-color: yellow;
+} */
+
+/* span:hover + .object {
+  display: block;
+} */
+
+/* div.object:hover {
+  animation: MoveUpDown 1s linear;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+} */
+
+/* @keyframes MoveUpDown {
+  0%, 100% {
+    bottom: 0;
+  }
+  50% {
+    bottom: 100px;
+  }
+} */

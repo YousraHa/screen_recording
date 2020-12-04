@@ -9,6 +9,12 @@ let constraintObj = {
     }
 }; 
 
+let isWebcamOn = true;
+let isAudioOn = true;
+let isRecording = true;
+
+
+
 
 
 //handle older browsers that might implement getUserMedia in some way
@@ -55,59 +61,90 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 
     
     //add listeners for saving video/audio
-    let start = document.getElementById('btnStart');
-    let stop = document.getElementById('btnStop');
-    let startMic = document.getElementById('startMic');
-    let stopMic = document.getElementById('stopMic');
-    let startWebcam = document.getElementById('startWebcam');
-    let stopWebcam = document.getElementById('stopWebcam')
-    let vidSave = document.getElementById('vid2');
-    let mediaRecorder = new MediaRecorder(mediaStreamObj);
+    const start = document.getElementById('btnStart');
+    // const stop = document.getElementById('btnStop');
+    const startMic = document.getElementById('startMic');
+    const startWebcam = document.getElementById('startWebcam');
+    const stopWebcam = document.getElementById('startWebcam')
+    const vidSave = document.getElementById('vid2');
+    const mediaRecorder = new MediaRecorder(mediaStreamObj);
     let chunks = [];
+
     
     start.addEventListener('click', (ev)=>{
-        mediaRecorder.start();
-        // var btn = document.getElementById("btnStop");
-        console.log(mediaRecorder.state, 'start');
+        if(isRecording){
+            mediaRecorder.start();
+            isRecording = !isRecording;
+            console.log(mediaRecorder.state, 'start');
+            document.querySelector('#btnStart').textContent='STOP'
+            // $('#btnStart').text('STOP');
+        } else {
+            mediaRecorder.stop();
+            $("#myModal").modal();
+            console.log(mediaRecorder.state, 'stop');
+            // $('#btnStart').text('START');
+            document.querySelector('#btnStart').textContent='START'
+        }
     })
-    stop.addEventListener('click', (ev)=>{
-        mediaRecorder.stop();
-        $("#myModal").modal();
-        console.log(mediaRecorder.state, 'stop');
-    });
-    //webcam
+    
     startWebcam.addEventListener('click', (ev)=>{
-        var track = mediaStreamObj.getTracks()[1];
-        track.enabled = true
-        // console.log(mediaStreamObj.getTracks(), 'gettracks')
-        // mediaStreamObj.getTracks().forEach(track => track.stop())
-        console.log(track,'track')
-        console.log(mediaRecorder.state, 'stop');
+        isWebcamOn = !isWebcamOn
+        if(isWebcamOn){
+            showElement()
+            console.log('webcamstart', isWebcamOn)
+            const track = mediaStreamObj.getTracks()[1];
+            track.enabled = true
+            $('#startWebcam').text('videocam');
+        } else {
+            console.log('webcamoff', isWebcamOn)
+            hideElement()
+            const track = mediaStreamObj.getTracks()[1];
+            track.enabled = false
+
+            $('#startWebcam').text('videocam_off');
+
+        }
     });
-    stopWebcam.addEventListener('click', (ev)=>{
-        var track = mediaStreamObj.getTracks()[1];
-        track.enabled = false
-        console.log(mediaStreamObj.getTracks(), 'gettracks')
-        // mediaStreamObj.getTracks().forEach(track => track.stop())
-        console.log(track,'track')
-        console.log(mediaRecorder.state, 'stop');
-    });
+    // stopWebcam.addEventListener('click', (ev)=>{
+    //     if(!isWebcamOn){
+    //         console.log('isweb', isWebcamOn)
+    //         hideElement()
+    //         const track = mediaStreamObj.getTracks()[1];
+    //         track.enabled = false
+    //     $('#startWebcam').text('videocam_off');
+    //     } else{
+    //     $('#startWebcam').text('videocam');
+    //     }
+    // });
+
     //micro
     startMic.addEventListener('click', (ev)=>{
-        var track = mediaStreamObj.getTracks()[0];
-        track.enabled = true;
-        // mediaRecorder.start();
-        // console.log(track,'track');
-        console.log(mediaRecorder.state, 'stop');
+        isAudioOn = !isAudioOn
+        const track = mediaStreamObj.getTracks()[0];
+        if (isAudioOn){
+            track.enabled = true;
+            console.log(mediaRecorder.state, 'start');
+            $('#startMic').text('mic')
+        } else {
+            $('#startMic').text('mic_off')
+             track.enabled = false
+
+        }
     });
-    stopMic.addEventListener('click', (ev)=>{
-        var track = mediaStreamObj.getTracks()[0];
-        track.enabled = false
-        console.log(mediaStreamObj.getTracks(), 'gettracks')
-        // mediaStreamObj.getTracks().forEach(track => track.stop())
-        console.log(track,'track')
-        console.log(mediaRecorder.state, 'stop');
-    });
+    // stopMic.addEventListener('click', (ev)=>{
+    //     // isAudioOn = !isAudioOn
+    //     if (!isAudioOn){
+    //         var track = mediaStreamObj.getTracks()[0];
+    //         track.enabled = false
+    //         console.log(mediaStreamObj.getTracks(), 'gettracks')
+    //         // mediaStreamObj.getTracks().forEach(track => track.stop())
+    //         console.log(track,'track')
+    //         console.log(mediaRecorder.state, 'stop');
+    //         $('#startMic').text('mic_off')
+    //     } else {
+    //         $('#startMic').text('mic')
+    //     }
+    // });
     mediaRecorder.ondataavailable = function(ev) {
         chunks.push(ev.data);
     }
@@ -122,16 +159,36 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     console.log(err.name, err.message); 
 });
 
-// jQuery pour le draggable
-$(function () {
-    $(".winston").draggable()
-  });
+let isAlarmOn = true;
 
-function hideWebcam() {
+
+// jQuery start
+    $(function () {
+        $(".winston").draggable()
+    });
+
+    // $(function(){
+    //     $('#click_advance').click(function() { 
+    //         console.log('click click');
+    //         isAlarmOn = !isAlarmOn
+    //         if(isAlarmOn){
+    //             $('#GFG_Span').text('alarm_on');
+    //         } else {
+    //             $('#GFG_Span').text('alarm_off');
+    //         }
+            
+    //     });
+        
+    // });
+
+//jQuery end
+
+function showElement(){
     var x = document.getElementById("wbcm");
-    if (x.style.display === "none") {
       x.style.display = "block";
-    } else {
+}
+
+function hideElement() {
+    var x = document.getElementById("wbcm");
       x.style.display = "none";
-    }
   };

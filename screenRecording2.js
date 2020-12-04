@@ -1,11 +1,13 @@
 
-const videoElem = document.getElementById("vid");
+const videoElem = document.querySelector("#vid");
 const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
-const stopElem = document.getElementById("stop");
+let isScreenShare = true;
+
+
 // Options for getDisplayMedia()
 
-var displayMediaOptions = {
+const displayMediaOptions = {
   video: {
     cursor: "always"
   },
@@ -22,29 +24,33 @@ function dumpOptionsInfo() {
 }
 
 async function startCapture() {
-    logElem.innerHTML = "";
-  
-    try {
-      videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-      dumpOptionsInfo();
-    } catch(err) {
-      console.error("Error: " + err);
-    }
+  logElem.innerHTML = "";
+
+  try {
+    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    dumpOptionsInfo();
+  } catch(err) {
+    console.error("Error: " + err);
   }
-
-  function stopCapture(evt) {
-    let tracks = videoElem.srcObject.getTracks();
-  
-    tracks.forEach(track => track.stop());
-    videoElem.srcObject = null;
-  }
+};
 
 
-// Set event listeners for the start and stop buttons
+function stopCapture(evt) {
+  let tracks = videoElem.srcObject.getTracks();
+  console.log(tracks, 'tracksssss')
+
+  tracks.forEach(track => track.stop());
+  videoElem.srcObject = null;
+};
+
+
 startElem.addEventListener("click", function(evt) {
-  startCapture();
-}, false);
-
-stopElem.addEventListener("click", function(evt) {
-  stopCapture();
+  isScreenShare = !isScreenShare
+    if (!isScreenShare){
+      $('#start').text('screen_share')
+      startCapture();
+    } else {
+      stopCapture();
+      $('#start').text('stop_screen_share')
+    }
 }, false);

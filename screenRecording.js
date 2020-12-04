@@ -1,7 +1,7 @@
-const start = document.getElementById("start");
-const stop = document.getElementById("stop");
-const video = document.querySelector("#vid");
+const start = document.getElementById("start1");
+const video = document.querySelector("#vidd");
 let recorder, stream;
+let isScreenRecording = true;
 
 async function startRecording() {
   stream = await navigator.mediaDevices.getDisplayMedia({
@@ -17,22 +17,33 @@ async function startRecording() {
     const completeBlob = new Blob(chunks, { type: chunks[0].type });
     video.src = URL.createObjectURL(completeBlob);
   };
-  console.log("test1")
   recorder.start();
 }
 
 start.addEventListener("click", () => {
-  start.setAttribute("disabled", true);
-  stop.removeAttribute("disabled");
-  console.log("test1")
-  startRecording();
-});
-
-stop.addEventListener("click", () => {
-  stop.setAttribute("disabled", true);
-  start.removeAttribute("disabled");
-  console.log("test1")
-
+  isScreenRecording = !isScreenRecording
+  if (!isScreenRecording){
+    console.log("test1")
+    startRecording();
+    $('#start1').text('STOPscreen')
+} else {
+  console.log("test2")
   recorder.stop();
   stream.getVideoTracks()[0].stop();
+  $('#start1').text('STARTscreen')
+}
 });
+
+// stop.addEventListener("click", () => {
+//   // stream.getVideoTracks()[0].stop();
+//   // isRecording = !isRecording
+//   if (!isRecording){
+//     stop.setAttribute("disabled", true);
+//     start.removeAttribute("disabled");
+//     console.log("test1")
+//     recorder.stop();
+//     $('#start1').text('STOP')
+// } else {
+//     $('#start1').text('START')
+// }
+// });
