@@ -50,58 +50,69 @@
                 </div> -->
                 
                 <div class="row">
+                    <div class="col-sm">
                     <video class="webcam winston" id="wbcm"></video>
+                    </div>
+                    <div class="col-sm">
+                        <video id="vid" class="screenSharing winston" autoplay />
+                        <pre id="log"></pre>
+                    </div>
+                    
                 </div>
-                <div class="row">
-                    <video id="vid" class="screenCapture winston" autoplay />
-
+                <!-- <div class="row">
+                    <video id="vid" class="screenSharing winston" autoplay />
                     <pre id="log"></pre>
-                </div>
+                </div> -->
                 <div class="row">
-                    <video id="vidd" class="screenCapture winston" controls />
+                    <div class="col-sm">
+                    <video id="recordedScreen" class="screenCapture winston" controls />
+                </div>
                 </div>
 
                 <!-- Modale start -->
-                <div id="myModal" class="modal">
+                <!-- <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close" data-dismiss="modal" aria-label="Close">&times;</span>
                         <p>Video down below</p>
                         <video id="vid2" controls></video>
                     </div>
-                </div>
+                </div> -->
                 <!-- Modale end -->
 
             </div>
-            <div class="container ">
 
-                <button class="material-icons flex-item">
+            <footer>
+            <div class="flex buttonBar">
+                <!-- <div class=""> -->
+                <button type="button" class=" flex-item material-icons ">
                     call_end
                 </button>
 
-                <button class="material-icons flex-item" id="startWebcam" >
+                <button type="button" class="flex-item material-icons" id="startLiveCam" >
                     videocam
                 </button>
 
-                <button id="btnStart" class="flex-item">
+                <!-- <button id="btnStart" class="flex-item">
                     START
-                </button>
+                </button> -->
 
-                <button id="start1" class="flex-item">
-                    STARTscreen
+                <button id="startRecBtn" class=" flex-item material-icons">
+                    present_to_all
                 </button>
 
                 <button id="startMic" class="flex-item material-icons">
                     mic
                 </button>
 
-                <button id="start" class="material-icons flex-item">
+                <button id="startRecScreen" class="flex-item material-icons ">
                     stop_screen_share
                 </button>
-
+                <!-- </div> -->
             </div>
+        </footer>
 
-    <script src="screenRecording2.js"></script>
-    <script src="screenRecording.js"></script>
+    <!-- <script src="screenRecording2.js"></script> -->
+    <!-- <script src="screenRecording.js"></script> -->
 
     </body>
 </html>

@@ -1,7 +1,7 @@
 
 const videoElem = document.querySelector("#vid");
 const logElem = document.getElementById("log");
-const startElem = document.getElementById("start");
+const startRecScreen = document.getElementById("startRecScreen");
 let isScreenShare = true;
 
 
@@ -21,7 +21,7 @@ function dumpOptionsInfo() {
     console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
     console.info("Track constraints:");
     console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
-}
+};
 
 async function startCapture() {
   logElem.innerHTML = "";
@@ -44,13 +44,13 @@ function stopCapture(evt) {
 };
 
 
-startElem.addEventListener("click", function(evt) {
+startRecScreen.addEventListener("click", function(evt) {
   isScreenShare = !isScreenShare
     if (!isScreenShare){
-      $('#start').text('screen_share')
+      $('#startRecScreen').text('screen_share')
       startCapture();
     } else {
       stopCapture();
-      $('#start').text('stop_screen_share')
+      $('#startRecScreen').text('stop_screen_share')
     }
 }, false);

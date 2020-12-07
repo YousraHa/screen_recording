@@ -1,5 +1,5 @@
-const start = document.getElementById("start1");
-const video = document.querySelector("#vidd");
+const startRecBtn = document.getElementById("startRecBtn");
+const recordedScreen = document.querySelector("#recordedScreen");
 let recorder, stream;
 let isScreenRecording = true;
 
@@ -15,22 +15,22 @@ async function startRecording() {
   recorder.ondataavailable = e => chunks.push(e.data);
   recorder.onstop = e => {
     const completeBlob = new Blob(chunks, { type: chunks[0].type });
-    video.src = URL.createObjectURL(completeBlob);
+    recordedScreen.src = URL.createObjectURL(completeBlob);
   };
   recorder.start();
 }
 
-start.addEventListener("click", () => {
+startRecBtn.addEventListener("click", () => {
   isScreenRecording = !isScreenRecording
   if (!isScreenRecording){
     console.log("test1")
     startRecording();
-    $('#start1').text('STOPscreen')
+    $('#startRecBtn').text('STOPscreen')
 } else {
   console.log("test2")
   recorder.stop();
   stream.getVideoTracks()[0].stop();
-  $('#start1').text('STARTscreen')
+  $('#startRecBtn').text('STARTscreen')
 }
 });
 

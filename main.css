@@ -1,5 +1,5 @@
 body {
-    background-color: #011627;
+    background-color: #2b2d42;
     /* background-color: white; */
 
     font-family: 'Rubik', sans-serif;
@@ -7,7 +7,7 @@ body {
     font-size: 30px;
 }
 footer{
-  background-color: honeydew;
+  background-color: #edf2f4;
 }
 /* .navbar{
   justify-content: right;
@@ -19,7 +19,8 @@ footer{
 .flex {
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  margin-bottom: 10px;
+  padding : 20px;
   /* background-color: honeydew; */
 }
 .flex-item + .flex-item {
@@ -32,6 +33,7 @@ footer{
   max-width: 100%;
   height: auto;
   margin: 0 auto;
+  /* background-color: #8d99ae; */
 }
 
 .screenCapture{
@@ -41,15 +43,30 @@ footer{
   max-width: 100%;
   height: auto;
   margin: 30px auto;
+  display: none;
 }
 
-.smallCam{
+.screenSharing{
+  /* width: 500px;
+  height: 500px; */
+  /* margin-top: 30px; */
+  max-width: 100%;
+  height: auto;
+  margin: 30px auto;
+}
+
+.buttonBar{
+  /* position: fixed; */
+  bottom: 0;
+}
+
+/* .smallCam{
   width: 150px;
   height: 50px;
-}
+} */
 
 button{
-  color: #ff9f1c;
+  color: #e63946;
 }
 
 /* div.object:hover {

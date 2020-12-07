@@ -8,10 +8,19 @@ let constraintObj = {
         // height: 100%
     }
 }; 
+const displayMediaOptions = {
+    video: {
+      cursor: "always"
+    },
+    audio: true
+  };
 
 let isWebcamOn = true;
 let isAudioOn = true;
 let isRecording = true;
+let isScreenRecording = true;
+let isScreenShare = true;
+
 
 
 
@@ -33,7 +42,7 @@ if (navigator.mediaDevices === undefined) {
     navigator.mediaDevices.enumerateDevices()
     .then(devices => {
         devices.forEach(device=>{
-            console.log(device.kind.toUpperCase(), device.label);
+        console.log(device.kind.toUpperCase(), device.label);
             //, device.deviceId
         })
     })
@@ -46,6 +55,19 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 .then(function(mediaStreamObj) {
     //connect the media stream to the first video element
     let video = document.querySelector('video');
+    const startMic = document.getElementById('startMic');
+    const startLiveCam = document.getElementById('startLiveCam');
+    const mediaRecorder = new MediaRecorder(mediaStreamObj);
+    const startRecBtn = document.getElementById("startRecBtn");
+    const recordedScreen = document.querySelector("#recordedScreen");
+    const videoElem = document.querySelector("#vid");
+    const logElem = document.getElementById("log");
+    const startRecScreen = document.getElementById("startRecScreen");
+    let recorder, stream;
+
+
+
+    // let chunks = [];
     
     if ("srcObject" in video) {
         video.srcObject = mediaStreamObj;
@@ -59,65 +81,103 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         video.play();
     };
 
-    
-    //add listeners for saving video/audio
-    const start = document.getElementById('btnStart');
-    // const stop = document.getElementById('btnStop');
-    const startMic = document.getElementById('startMic');
-    const startWebcam = document.getElementById('startWebcam');
-    const stopWebcam = document.getElementById('startWebcam')
-    const vidSave = document.getElementById('vid2');
-    const mediaRecorder = new MediaRecorder(mediaStreamObj);
-    let chunks = [];
+    async function startRecording() {
+        stream = await navigator.mediaDevices.getDisplayMedia({
+          video: { 
+            mediaSource: "screen",
+            cursor: "always" }
+        });
+        recorder = new MediaRecorder(stream);
+      
+        const chunks = [];
+        recorder.ondataavailable = e => chunks.push(e.data);
+        recorder.onstop = e => {
+          const completeBlob = new Blob(chunks, { type: chunks[0].type });
+          recordedScreen.src = URL.createObjectURL(completeBlob);
+        };
+        recorder.start();
+      };
+      function dumpOptionsInfo() {
+        const videoTrack = videoElem.srcObject.getVideoTracks()[0];
+        
+        console.info("Track settings:");
+        console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
+        console.info("Track constraints:");
+        console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
+    };
+    async function startCapture() {
+        logElem.innerHTML = "";
+      
+        try {
+          videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+          dumpOptionsInfo();
+        } catch(err) {
+          console.error("Error: " + err);
+        }
+      };
+      
+      
+      function stopCapture(evt) {
+        let tracks = videoElem.srcObject.getTracks();
+        console.log(tracks, 'tracksssss')
+      
+        tracks.forEach(track => track.stop());
+        videoElem.srcObject = null;
+      };
+
+      
 
     
-    start.addEventListener('click', (ev)=>{
-        if(isRecording){
-            mediaRecorder.start();
-            isRecording = !isRecording;
-            console.log(mediaRecorder.state, 'start');
-            document.querySelector('#btnStart').textContent='STOP'
-            // $('#btnStart').text('STOP');
-        } else {
-            mediaRecorder.stop();
-            $("#myModal").modal();
-            console.log(mediaRecorder.state, 'stop');
-            // $('#btnStart').text('START');
-            document.querySelector('#btnStart').textContent='START'
-        }
-    })
-    
-    startWebcam.addEventListener('click', (ev)=>{
+    // EVENTLISTENERS
+    startRecScreen.addEventListener("click", (evt) => {
+        isScreenShare = !isScreenShare
+          if (!isScreenShare){
+            $('#startRecScreen').text('screen_share')
+            startCapture();
+          } else {
+            stopCapture();
+            $('#startRecScreen').text('stop_screen_share')
+          }
+      }, false);
+
+
+    startRecBtn.addEventListener("click", () => {
+        isScreenRecording = !isScreenRecording
+        if (!isScreenRecording){
+          console.log("test1")
+          startRecording();
+          showScreen()
+          $('#startRecBtn').text('cancel_presentation')
+      } else {
+        console.log("test2")
+        recorder.stop();
+        stream.getVideoTracks()[0].stop();
+        // hideScreen();
+        $('#startRecBtn').text('present_to_all')
+      }
+      });
+
+    // LIVE WEBCAM
+
+    startLiveCam.addEventListener('click', (ev)=>{
         isWebcamOn = !isWebcamOn
         if(isWebcamOn){
             showElement()
             console.log('webcamstart', isWebcamOn)
             const track = mediaStreamObj.getTracks()[1];
             track.enabled = true
-            $('#startWebcam').text('videocam');
+            $('#startLiveCam').text('videocam');
         } else {
             console.log('webcamoff', isWebcamOn)
             hideElement()
             const track = mediaStreamObj.getTracks()[1];
             track.enabled = false
-
-            $('#startWebcam').text('videocam_off');
-
+            $('#startLiveCam').text('videocam_off');
         }
     });
-    // stopWebcam.addEventListener('click', (ev)=>{
-    //     if(!isWebcamOn){
-    //         console.log('isweb', isWebcamOn)
-    //         hideElement()
-    //         const track = mediaStreamObj.getTracks()[1];
-    //         track.enabled = false
-    //     $('#startWebcam').text('videocam_off');
-    //     } else{
-    //     $('#startWebcam').text('videocam');
-    //     }
-    // });
+    // END LIVE WEBCAM
 
-    //micro
+    //MICRO
     startMic.addEventListener('click', (ev)=>{
         isAudioOn = !isAudioOn
         const track = mediaStreamObj.getTracks()[0];
@@ -127,45 +187,83 @@ navigator.mediaDevices.getUserMedia(constraintObj)
             $('#startMic').text('mic')
         } else {
             $('#startMic').text('mic_off')
-             track.enabled = false
+            track.enabled = false
 
         }
     });
-    // stopMic.addEventListener('click', (ev)=>{
-    //     // isAudioOn = !isAudioOn
-    //     if (!isAudioOn){
-    //         var track = mediaStreamObj.getTracks()[0];
-    //         track.enabled = false
-    //         console.log(mediaStreamObj.getTracks(), 'gettracks')
-    //         // mediaStreamObj.getTracks().forEach(track => track.stop())
-    //         console.log(track,'track')
-    //         console.log(mediaRecorder.state, 'stop');
-    //         $('#startMic').text('mic_off')
-    //     } else {
-    //         $('#startMic').text('mic')
-    //     }
-    // });
-    mediaRecorder.ondataavailable = function(ev) {
-        chunks.push(ev.data);
-    }
-    mediaRecorder.onstop = (ev)=>{
-        let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
-        chunks = [];
-        let videoURL = window.URL.createObjectURL(blob);
-        vidSave.src = videoURL;
-    }
-})
-.catch(function(err) { 
-    console.log(err.name, err.message); 
-});
+    // END MICRO
+    // END EVENTLISTENERS
+    
+    })
+    .catch(function(err) { 
+        console.log(err.name, err.message); 
+    });
 
-let isAlarmOn = true;
+    
 
+    // FUNCTIONS
+    
+    function showElement(){
+        var x = document.getElementById("wbcm");
+        x.style.display = "block";
+    };
+    
+    function hideElement() {
+        var x = document.getElementById("wbcm");
+        x.style.display = "none";
+    };
 
-// jQuery start
+    function showScreen(){
+        var x = document.getElementById("recordedScreen");
+        x.style.display = "block";
+    };
+    
+    function hideScreen() {
+        var x = document.getElementById("recordedScreen");
+        x.style.display = "none";
+    };
+
     $(function () {
         $(".winston").draggable()
     });
+    // END FUNCTIONS
+
+        //add listeners for saving video/audio
+    // const start = document.getElementById('btnStart');
+    // const stop = document.getElementById('btnStop');
+    // const stopWebcam = document.getElementById('startWebcam')
+    // const vidSave = document.getElementById('vid2');
+
+    
+    // start.addEventListener('click', (ev)=>{
+    //     if(isRecording){
+    //         mediaRecorder.start();
+    //         isRecording = !isRecording;
+    //         console.log(mediaRecorder.state, 'start');
+    //         document.querySelector('#btnStart').textContent='STOP'
+    //         // $('#btnStart').text('STOP');
+    //     } else {
+    //         mediaRecorder.stop();
+    //         $("#myModal").modal();
+    //         console.log(mediaRecorder.state, 'stop');
+    //         // $('#btnStart').text('START');
+    //         document.querySelector('#btnStart').textContent='START'
+    //     }
+    // })
+
+    // mediaRecorder.ondataavailable = function(ev) {
+    //     chunks.push(ev.data);
+    // }
+    // mediaRecorder.onstop = (ev)=>{
+    //     let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
+    //     chunks = [];
+    //     let videoURL = window.URL.createObjectURL(blob);
+    //     vidSave.src = videoURL;
+    // }
+
+
+// jQuery start
+    
 
     // $(function(){
     //     $('#click_advance').click(function() { 
@@ -183,12 +281,4 @@ let isAlarmOn = true;
 
 //jQuery end
 
-function showElement(){
-    var x = document.getElementById("wbcm");
-      x.style.display = "block";
-}
 
-function hideElement() {
-    var x = document.getElementById("wbcm");
-      x.style.display = "none";
-  };
