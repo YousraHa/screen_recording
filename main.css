@@ -12,6 +12,7 @@ body {
 }
 
 /* footer{
+  padding: 30 auto;
 } */
 
 /* #mouseTarget {
@@ -35,10 +36,10 @@ body {
 
 .flex {
   background-color: #edf2f4;
-  animation-name: Down;
+  /* animation-name: Down; */
    /* animation-duration:5s; */
   /* animation: none; */
-  position: sticky;
+  position: absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
