@@ -123,22 +123,26 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         videoElem.srcObject = null;
       };
 
-      
-
     
     // EVENTLISTENERS
+
+    const ee = document.getElementsByCLassName("flex")[0]
     
     mouseTarget.addEventListener('mouseenter', e => {
     console.log('entrer')
     var x = document.getElementsByClassName("flex")[0]
-    x.style.display = "block";
+    //x.style.visibility = "visible"
+    ee.style.visibility = "visible";
+    //x.style.display = "block";
     });
     
     mouseTarget.addEventListener('mouseleave', e => {
     console.log('sortir')
 
     var x = document.getElementsByClassName("flex")[0]
-    x.style.display = "none";
+    //x.style.display = "none";
+    //x.style.visibility = "hidden";
+    ee.style.visibility = "hidden";
     });
     
 

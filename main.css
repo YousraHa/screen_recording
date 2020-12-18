@@ -39,13 +39,14 @@ body {
    /* animation-duration:5s; */
   /* animation: none; */
   position: sticky;
+  position: fixed;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
   text-align: center;
   bottom: 0;
-  display: flex;
+  /*display: flex;*/
   justify-content: center;
   /* align-items: center; */
   border: 1px solid black;
