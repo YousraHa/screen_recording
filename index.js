@@ -62,12 +62,10 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     const recordedScreen = document.querySelector("#recordedScreen");
     const videoElem = document.querySelector("#vid");
     const logElem = document.getElementById("log");
-    const startRecScreen = document.getElementById("startRecScreen");
+    const startLiveScreen = document.getElementById("startLiveScreen");
+    const mouseTarget = document.getElementsByTagName("footer")[0];
     let recorder, stream;
 
-
-
-    // let chunks = [];
     
     if ("srcObject" in video) {
         video.srcObject = mediaStreamObj;
@@ -129,50 +127,73 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 
     
     // EVENTLISTENERS
-    startRecScreen.addEventListener("click", (evt) => {
+    
+    mouseTarget.addEventListener('mouseenter', e => {
+    console.log('entrer')
+    var x = document.getElementsByClassName("flex")[0]
+    x.style.display = "block";
+    });
+    
+    mouseTarget.addEventListener('mouseleave', e => {
+    console.log('sortir')
+
+    var x = document.getElementsByClassName("flex")[0]
+    x.style.display = "none";
+    });
+    
+
+    startLiveScreen.addEventListener("click", (evt) => {
         isScreenShare = !isScreenShare
           if (!isScreenShare){
-            $('#startRecScreen').text('screen_share')
+            // $('#startLiveScreen').text('screen_share');
+            document.querySelector('#startLiveScreen').textContent='screen_share';
             startCapture();
           } else {
             stopCapture();
-            $('#startRecScreen').text('stop_screen_share')
+            // $('#startLiveScreen').text('stop_screen_share')
+            document.querySelector('#startLiveScreen').textContent='stop_screen_share';
           }
       }, false);
 
-
+    //   RECORDING SCREEN
     startRecBtn.addEventListener("click", () => {
         isScreenRecording = !isScreenRecording
         if (!isScreenRecording){
           console.log("test1")
           startRecording();
           showScreen()
-          $('#startRecBtn').text('cancel_presentation')
+        //   $('#startRecBtn').text('cancel_presentation');
+          document.querySelector('#startRecBtn').textContent='cancel_presentation';
       } else {
         console.log("test2")
         recorder.stop();
         stream.getVideoTracks()[0].stop();
         // hideScreen();
-        $('#startRecBtn').text('present_to_all')
+        // $('#startRecBtn').text('present_to_all');
+        document.querySelector('#startRecBtn').textContent='present_to_all';
       }
       });
+    // END RECORDING SCREEN
 
     // LIVE WEBCAM
 
     startLiveCam.addEventListener('click', (ev)=>{
         isWebcamOn = !isWebcamOn
         if(isWebcamOn){
-            showElement()
-            console.log('webcamstart', isWebcamOn)
+            showElement();
+            console.log('webcamstart', isWebcamOn);
             const track = mediaStreamObj.getTracks()[1];
-            track.enabled = true
-            $('#startLiveCam').text('videocam');
+            track.enabled = true;
+            // $('#startLiveCam').text('videocam');
+            document.querySelector('#startLiveCam').textContent='videocam';
+
         } else {
             console.log('webcamoff', isWebcamOn)
-            hideElement()
+            hideElement();
             const track = mediaStreamObj.getTracks()[1];
-            track.enabled = false
-            $('#startLiveCam').text('videocam_off');
+            track.enabled = false;
+            // $('#startLiveCam').text('videocam_off');
+            document.querySelector('#startLiveCam').textContent='videocam_off';
         }
     });
     // END LIVE WEBCAM
@@ -184,11 +205,12 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         if (isAudioOn){
             track.enabled = true;
             console.log(mediaRecorder.state, 'start');
-            $('#startMic').text('mic')
+            // $('#startMic').text('mic')
+            document.querySelector('#startMic').textContent='mic';
         } else {
-            $('#startMic').text('mic_off')
-            track.enabled = false
-
+            // $('#startMic').text('mic_off')
+            document.querySelector('#startMic').textContent='mic_off';
+            track.enabled = false;
         }
     });
     // END MICRO
@@ -222,6 +244,15 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         var x = document.getElementById("recordedScreen");
         x.style.display = "none";
     };
+    // function show(){
+    //     var x = document.getElementById("hide");
+    //     x.style.display = "block";
+    // };
+    
+    // function hide() {
+    //     var x = document.getElementById("hide");
+    //     x.style.display = "none";
+    // };
 
     $(function () {
         $(".winston").draggable()

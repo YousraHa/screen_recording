@@ -1,45 +1,69 @@
 body {
     background-color: #2b2d42;
-    /* background-color: white; */
-
     font-family: 'Rubik', sans-serif;
     color: #fdfffc;
     font-size: 30px;
 }
-footer{
-  background-color: #edf2f4;
+
+.container{
+  /* height: 100vh; */
+  /* border: 1px solid red; */
+  justify-content: center
 }
-/* .navbar{
-  justify-content: right;
-} */
 
 /* footer{
- padding: 20px;
 } */
+
+/* #mouseTarget {
+  box-sizing: border-box;
+  width:15rem;
+  border:1px solid #333;
+} */
+
+.flex:hover{
+  /* display: block; */
+  animation-duration: 1s;
+  animation-name: Up;
+  animation-fill-mode: forwards;
+  
+}
+
+@keyframes Up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-20px); }
+}
+
 .flex {
+  background-color: #edf2f4;
+  animation-name: Down;
+   /* animation-duration:5s; */
+  /* animation: none; */
+  position: sticky;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 0;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  /* align-items: center; */
+  border: 1px solid black;
   padding : 20px;
-  /* background-color: honeydew; */
 }
+
 .flex-item + .flex-item {
   margin-left: 40px;
 }
 
 .webcam{
-  /* width: 500px;
-  height: 500px; */
   max-width: 100%;
   height: auto;
   margin: 0 auto;
-  /* background-color: #8d99ae; */
+  display: block;
 }
 
 .screenCapture{
-  /* width: 500px;
-  height: 500px; */
-  /* margin-top: 30px; */
   max-width: 100%;
   height: auto;
   margin: 30px auto;
@@ -47,57 +71,15 @@ footer{
 }
 
 .screenSharing{
-  /* width: 500px;
-  height: 500px; */
-  /* margin-top: 30px; */
   max-width: 100%;
   height: auto;
   margin: 30px auto;
+  /* display: none; */
+  /* visibility: hidden; */
 }
 
-.buttonBar{
-  /* position: fixed; */
-  bottom: 0;
-}
-
-/* .smallCam{
-  width: 150px;
-  height: 50px;
-} */
 
 button{
   color: #e63946;
 }
 
-/* div.object:hover {
-  animation: MoveUp linear;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-} */
-/* background-color: yellow; */
-
-/* .object {
-  display: none;
-  background-color: yellow;
-} */
-
-/* span:hover + .object {
-  display: block;
-} */
-
-/* div.object:hover {
-  animation: MoveUpDown 1s linear;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-} */
-
-/* @keyframes MoveUpDown {
-  0%, 100% {
-    bottom: 0;
-  }
-  50% {
-    bottom: 100px;
-  }
-} */
