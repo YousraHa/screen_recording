@@ -21,18 +21,17 @@ body {
   border:1px solid #333;
 } */
 
-.flex:hover{
-  /* display: block; */
+/* .flex:hover{
   animation-duration: 1s;
   animation-name: Up;
   animation-fill-mode: forwards;
   
-}
+} */
 
-@keyframes Up {
+/* @keyframes Up {
   from { transform: translateY(0); }
   to { transform: translateY(-20px); }
-}
+} */
 
 .flex {
   background-color: #edf2f4;

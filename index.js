@@ -1,3 +1,5 @@
+// var liveServer = require("live-server");
+
 let constraintObj = { 
     audio: true, 
     video: { 
@@ -128,18 +130,18 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     
     // EVENTLISTENERS
     
-    mouseTarget.addEventListener('mouseenter', e => {
-    console.log('entrer')
-    var x = document.getElementsByClassName("flex")[0]
-    x.style.display = "block";
-    });
+    // mouseTarget.addEventListener('mouseenter', e => {
+    // console.log('entrer')
+    // var x = document.getElementsByClassName("flex")[0]
+    // x.style.display = "block";
+    // });
     
-    mouseTarget.addEventListener('mouseleave', e => {
-    console.log('sortir')
+    // mouseTarget.addEventListener('mouseleave', e => {
+    // console.log('sortir')
 
-    var x = document.getElementsByClassName("flex")[0]
-    x.style.display = "none";
-    });
+    // var x = document.getElementsByClassName("flex")[0]
+    // x.style.display = "none";
+    // });
     
 
     startLiveScreen.addEventListener("click", (evt) => {
